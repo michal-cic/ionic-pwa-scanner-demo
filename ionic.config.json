@@ -1,0 +1,7 @@
+{
+  "name": "ionic-pwa-scanner-demo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
