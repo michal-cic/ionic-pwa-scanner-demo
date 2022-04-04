@@ -77,7 +77,7 @@ export default defineComponent({
       BarcodeFormat.CODE_39,
     ]);
 
-    this.reader = new BrowserMultiFormatReader(hints);
+    this.reader = new BrowserMultiFormatReader();
 
     this.reader.decodeFromVideoDevice(null, this.camera, (result) => {
       if (result) {
