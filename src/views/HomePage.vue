@@ -68,7 +68,8 @@ export default defineComponent({
       BarcodeFormat.CODE_39,
       BarcodeFormat.CODE_128,
     ]);
-    hints.set(DecodeHintType.TRY_HARDER, true);
+    // TRY_HARDER decreases performance, but improves recognition?
+    // hints.set(DecodeHintType.TRY_HARDER, true);
 
     this.reader = new BrowserMultiFormatReader(hints, DELAY_MS);
     this.reader.decodeFromVideoDevice(null, this.camera, (result, err) => {
