@@ -28,6 +28,7 @@ import {
   IonToolbar,
   IonTitle,
   IonContent,
+  toastController,
 } from "@ionic/vue";
 import {
   BrowserMultiFormatReader,
@@ -43,6 +44,15 @@ export default defineComponent({
       camera: null as HTMLVideoElement | null,
       reader: null as BrowserMultiFormatReader | null,
     };
+  },
+  methods: {
+    async openToast(message: string) {
+      const toast = await toastController.create({
+        message,
+        duration: 2000,
+      });
+      return toast.present();
+    },
   },
   mounted: async function () {
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -72,6 +82,7 @@ export default defineComponent({
     this.reader.decodeFromVideoDevice(null, this.camera, (result) => {
       if (result) {
         console.log(result);
+        this.openToast(result.toString());
       }
     });
   },
