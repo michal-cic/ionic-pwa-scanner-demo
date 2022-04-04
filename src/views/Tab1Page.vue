@@ -52,10 +52,6 @@ export default defineComponent({
       },
     });
 
-    const videoTracks = stream.getVideoTracks();
-    const track = videoTracks[0];
-    new ImageCapture(track);
-
     this.camera = this.$refs.cameraRef as any;
 
     if (this.camera) {
