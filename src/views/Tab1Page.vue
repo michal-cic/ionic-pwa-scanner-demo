@@ -79,10 +79,15 @@ export default defineComponent({
 
     this.reader = new BrowserMultiFormatReader();
 
-    this.reader.decodeFromVideoDevice(null, this.camera, (result) => {
+    this.reader.decodeFromVideoDevice(null, this.camera, (result, err) => {
       if (result) {
         console.log(result);
         this.openToast(result.toString());
+      }
+
+      if (err && err.getKind() !== 'NotFoundException') {
+        console.error(err.getKind())
+        this.openToast(err.getKind());
       }
     });
   },
