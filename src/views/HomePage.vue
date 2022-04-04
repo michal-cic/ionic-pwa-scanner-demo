@@ -105,6 +105,7 @@ export default defineComponent({
 
 .cam-container {
   width: 100%;
+  max-height: 50%;
 }
 
 video {
