@@ -1,16 +1,6 @@
 <template>
   <ion-page>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Tab 1</ion-title>
-      </ion-toolbar>
-    </ion-header>
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Tab 1</ion-title>
-        </ion-toolbar>
-      </ion-header>
       <div class="container">
         <div class="cam-container">
           <video ref="cameraRef" autoplay></video>
@@ -27,14 +17,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import {
-  IonPage,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
-  IonContent,
-  toastController,
-} from "@ionic/vue";
+import { IonPage, IonContent, toastController } from "@ionic/vue";
 import {
   BrowserMultiFormatReader,
   BarcodeFormat,
@@ -44,8 +27,8 @@ import {
 const DELAY_MS = 1;
 
 export default defineComponent({
-  name: "Tab1Page",
-  components: { IonHeader, IonToolbar, IonTitle, IonContent, IonPage },
+  name: "HomePage",
+  components: { IonContent, IonPage },
   data: function () {
     return {
       camera: null as HTMLVideoElement | null,
@@ -67,8 +50,8 @@ export default defineComponent({
       audio: false,
       video: {
         facingMode: "environment",
-        width: 640,
-        height: 480,
+        width: 520,
+        height: 300,
         // frameRate: 30,
       },
     });
@@ -116,13 +99,12 @@ export default defineComponent({
 
 .results {
   margin-top: 1rem;
-  width: 640px;
   overflow-y: scroll;
 }
 
 .cam-container {
-  width: 640px;
-  height: 480px;
+  width: 520px;
+  height: 300px;
 }
 
 video {
