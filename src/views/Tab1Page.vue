@@ -29,7 +29,11 @@ import {
   IonTitle,
   IonContent,
 } from "@ionic/vue";
-import { BrowserMultiFormatReader, BarcodeFormat } from "@zxing/library";
+import {
+  BrowserMultiFormatReader,
+  BarcodeFormat,
+  DecodeHintType,
+} from "@zxing/library";
 
 export default defineComponent({
   name: "Tab1Page",
@@ -37,8 +41,7 @@ export default defineComponent({
   data: function () {
     return {
       camera: null as HTMLVideoElement | null,
-      reader: new BrowserMultiFormatReader(),
-      formats: [BarcodeFormat.QR_CODE],
+      reader: null as BrowserMultiFormatReader | null,
     };
   },
   mounted: async function () {
@@ -57,6 +60,14 @@ export default defineComponent({
     if (this.camera) {
       this.camera.srcObject = stream;
     }
+
+    const hints = new Map();
+    hints.set(DecodeHintType.POSSIBLE_FORMATS, [
+      BarcodeFormat.QR_CODE,
+      BarcodeFormat.CODE_39,
+    ]);
+
+    this.reader = new BrowserMultiFormatReader(hints);
 
     this.reader.decodeFromVideoDevice(null, this.camera, (result) => {
       if (result) {
