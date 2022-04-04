@@ -12,10 +12,9 @@
         </ion-toolbar>
       </ion-header>
       <div class="container">
-
-      <div class="cam-container">
-        <video ref="cameraRef" autoplay></video>
-      </div>
+        <div class="cam-container">
+          <video ref="cameraRef" autoplay></video>
+        </div>
       </div>
     </ion-content>
   </ion-page>
@@ -30,6 +29,7 @@ import {
   IonTitle,
   IonContent,
 } from "@ionic/vue";
+import { BrowserMultiFormatReader, BarcodeFormat } from "@zxing/library";
 
 export default defineComponent({
   name: "Tab1Page",
@@ -37,6 +37,8 @@ export default defineComponent({
   data: function () {
     return {
       camera: null as HTMLVideoElement | null,
+      reader: new BrowserMultiFormatReader(),
+      formats: [BarcodeFormat.QR_CODE],
     };
   },
   mounted: async function () {
@@ -50,13 +52,21 @@ export default defineComponent({
       },
     });
 
-    this.camera = this.$refs.cameraRef as any;
+    const videoTracks = stream.getVideoTracks();
+    const track = videoTracks[0];
+    new ImageCapture(track);
 
-    
+    this.camera = this.$refs.cameraRef as any;
 
     if (this.camera) {
       this.camera.srcObject = stream;
     }
+
+    this.reader.decodeFromVideoDevice(null, this.camera, (result) => {
+      if (result) {
+        console.log(result);
+      }
+    });
   },
 });
 </script>
