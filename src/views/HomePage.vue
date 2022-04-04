@@ -50,8 +50,8 @@ export default defineComponent({
       audio: false,
       video: {
         facingMode: "environment",
-        width: 520,
-        height: 300,
+        width: 500,
+        height: 320,
         // frameRate: 30,
       },
     });
@@ -92,6 +92,7 @@ export default defineComponent({
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   flex-direction: column;
   margin-left: auto;
   margin-right: auto;
@@ -103,8 +104,7 @@ export default defineComponent({
 }
 
 .cam-container {
-  width: 520px;
-  height: 300px;
+  width: 100%;
 }
 
 video {
