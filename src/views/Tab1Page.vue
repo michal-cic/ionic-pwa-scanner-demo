@@ -106,24 +106,21 @@ export default defineComponent({
 
 <style scoped>
 .container {
-  width: 100%;
   height: 100%;
   display: flex;
+  align-items: center;
   flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .results {
   margin-top: 1rem;
-  margin-left: auto;
-  margin-right: auto;
   width: 640px;
-  height: 640px;
   overflow-y: scroll;
 }
 
 .cam-container {
-  margin-left: auto;
-  margin-right: auto;
   width: 640px;
   height: 480px;
 }
