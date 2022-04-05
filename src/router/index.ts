@@ -1,11 +1,29 @@
 import { createRouter, createWebHistory } from "@ionic/vue-router";
 import { RouteRecordRaw } from "vue-router";
-import HomePage from "../views/HomePage.vue";
+import TabsPage from "../views/TabsPage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    component: HomePage,
+    redirect: "/tabs/zxing",
+  },
+  {
+    path: "/tabs",
+    component: TabsPage,
+    children: [
+      {
+        path: "zxing",
+        component: () => import("../views/ZxingPage.vue"),
+      },
+      {
+        path: "zbar-wasm",
+        component: () => import("../views/ZbarWasmPage.vue"),
+      },
+      {
+        path: "quagga2",
+        component: () => import("../views/Quagga2Page.vue"),
+      },
+    ],
   },
 ];
 

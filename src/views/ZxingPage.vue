@@ -1,5 +1,10 @@
 <template>
   <ion-page>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Zxing scanner</ion-title>
+      </ion-toolbar>
+    </ion-header>
     <ion-content :fullscreen="true">
       <div class="container">
         <div class="cam-container">
@@ -18,8 +23,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { IonPage, IonContent, toastController } from "@ionic/vue";
-import { scanImageData } from "zbar.wasm";
+import {
+  IonHeader,
+  IonTitle,
+  IonPage,
+  IonContent,
+  IonToolbar,
+  toastController,
+} from "@ionic/vue";
 import {
   BrowserMultiFormatReader,
   BarcodeFormat,
@@ -29,8 +40,8 @@ import {
 const DELAY_MS = 1;
 
 export default defineComponent({
-  name: "HomePage",
-  components: { IonContent, IonPage },
+  name: "ZxingPage",
+  components: { IonContent, IonPage, IonHeader, IonToolbar, IonTitle },
   data: function () {
     return {
       camera: null as HTMLVideoElement | null,
@@ -63,33 +74,6 @@ export default defineComponent({
     if (this.camera) {
       this.camera.srcObject = stream;
     }
-
-    // ---Zbar.wasm implementation TODO
-    // const videoTracks = stream.getVideoTracks();
-    // const track = videoTracks[0];
-    // const capture = new ImageCapture(track);
-    // const drawImageIntoCanvas = async (imgBitmap: ImageBitmap) => {
-    //   const canvas = this.$refs.canvas as HTMLCanvasElement;
-    //   const ctx = canvas.getContext("2d");
-    //   if (!ctx) return;
-    //   ctx.drawImage(imgBitmap, 0, 0);
-    //   return ctx.getImageData(0, 0, imgBitmap.width, imgBitmap.height);
-    // };
-
-    // capture
-    //   .grabFrame()
-    //   .then((imgBitmap) => {
-    //     drawImageIntoCanvas(imgBitmap).then((imgData) => {
-    //       if (!imgData) return console.error("error :D");
-    //       scanImageData(imgData).then((res) => {
-    //         console.log(res[0].typeName); // ZBAR_QRCODE
-    //         console.log(res[0].decode()); // Hello World
-    //       });
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.error("capture.grabFrame()", err);
-    //   });
 
     // ---Zxing implementation
     const hints = new Map();
@@ -132,6 +116,8 @@ export default defineComponent({
 .results {
   margin-top: 1rem;
   overflow-y: scroll;
+  width: 100%;
+  text-align: center;
 }
 
 .cam-container {
@@ -144,6 +130,3 @@ video {
   height: 100%;
 }
 </style>
-
-function scanImageData(img: any) { throw new Error("Function not implemented.");
-}
